@@ -5,7 +5,7 @@ import json
 fetchLocationsURL=f'https://api.clashofclans.com/v1/locations/'
 payload={'id': '29000022','season':'2024-02'} #legend league id and season id
 head={
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjNmM2Y2OGZkLTZjMGMtNGI4ZS04ZDgwLTk4YjlmNWE1MGRhZSIsImlhdCI6MTcwNzE3Nzc4MCwic3ViIjoiZGV2ZWxvcGVyL2EzZTdjMTNmLTEwMWYtMGMwYi04NzcwLTBjZjZmODkyMzU4YiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjEzNi4zNC4xNTIuNDgiXSwidHlwZSI6ImNsaWVudCJ9XX0.zoiFZrERJi3RsMUsXRj_wQFWwhmjorP5xKKYjUDeerwrp5bdvssjHiwOVMvMEUDMjYu-8D-fQ1BkjMEOfw384A'
+    'Authorization': 'Bearer YOUR_TOKEN'
 }
 r=requests.request(method="GET",url=fetchLocationsURL,headers=head,data={})
 locationList=json.loads(r.text)

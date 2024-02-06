@@ -1,0 +1,39 @@
+import requests
+import json
+
+
+fetchLocationsURL=f'https://api.clashofclans.com/v1/locations/'
+payload={'id': '29000022','season':'2024-02'} #legend league id and season id
+head={
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjNmM2Y2OGZkLTZjMGMtNGI4ZS04ZDgwLTk4YjlmNWE1MGRhZSIsImlhdCI6MTcwNzE3Nzc4MCwic3ViIjoiZGV2ZWxvcGVyL2EzZTdjMTNmLTEwMWYtMGMwYi04NzcwLTBjZjZmODkyMzU4YiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjEzNi4zNC4xNTIuNDgiXSwidHlwZSI6ImNsaWVudCJ9XX0.zoiFZrERJi3RsMUsXRj_wQFWwhmjorP5xKKYjUDeerwrp5bdvssjHiwOVMvMEUDMjYu-8D-fQ1BkjMEOfw384A'
+}
+r=requests.request(method="GET",url=fetchLocationsURL,headers=head,data={})
+locationList=json.loads(r.text)
+locationList=locationList['items']
+trophieList=[]
+for location in locationList:
+    if location['name']!='':
+        current=location['id']
+        print(location['name'])
+        fetchCountryRankingURL = f'https://api.clashofclans.com/v1/locations/{current}/rankings/players?limit=200'
+        if location['isCountry']:
+            r1 = requests.request(method="GET", url=fetchCountryRankingURL, headers=head, data={})
+            ranking=json.loads(r1.text)
+            ranking=ranking['items']
+            for rank in ranking:
+                trophieList.insert(0,int(rank['trophies']))
+                print(rank)
+                print(rank['trophies'])
+print("unsorted")
+print(trophieList)
+trophieList.sort()
+print("sorted")
+print(trophieList)
+print(f'1: {trophieList[-1]}, 100:{trophieList[-100]}, 200:{trophieList[-200]},1000:{trophieList[-1000]}')
+
+
+
+
+
+
+
